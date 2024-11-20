@@ -23,4 +23,15 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  green: {
+    primary: "#25D366", // Verde principal de WhatsApp
+    secondary: "#128C7E", // Verde oscuro para encabezados o botones activos
+    accent: "#FFEB3B", // Amarillo para elementos destacados
+    background: "#ECE5DD", // Fondo principal de la aplicación
+    chatBackground: "#FFFFFF", // Fondo de los chats
+    textPrimary: "#075E54", // Texto principal
+    textSecondary: "#434343", // Texto secundario
+    border: "#DADADA", // Bordes y separadores
+    inputBackground: "#F0F0F0", // Fondo de los campos de entrada
+  }
 };
