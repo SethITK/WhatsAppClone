@@ -51,7 +51,7 @@ export default function TabLayout() {
             backgroundColor: "#1E2A32",
           },
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="circle" />
+            <IconSymbol color={"#fff"} size={28} name="1.magnifyingglass.ar" />
           ),
         }}
       />
@@ -64,7 +64,7 @@ export default function TabLayout() {
             backgroundColor: "#1E2A32",
           },
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="phone" />
+            <IconSymbol color={"#fff"} size={28} name="person.crop.artframe" />
           ),
         }}
       />
@@ -77,7 +77,7 @@ export default function TabLayout() {
             backgroundColor: "#1E2A32",
           },
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="person.crop.circle" />
+            <IconSymbol color={"#fff"} size={28} name="phone.and.waveform.fill" />
           ),
         }}
       />
