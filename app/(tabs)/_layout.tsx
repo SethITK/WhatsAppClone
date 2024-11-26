@@ -1,38 +1,84 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Tabs } from "expo-router";
+import React from "react";
+import { Platform } from "react-native";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { HapticTab } from "@/components/HapticTab";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import TabBarBackground from "@/components/ui/TabBarBackground";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
     <Tabs
-      initialRouteName='(chats)'
+      initialRouteName="(chats)"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        animation: 'shift',
+        tabBarInactiveBackgroundColor: "#1E2A32",
+        animation: "shift",
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
+            position: "absolute",
           },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="(chats)"
         options={{
-          title: 'Chats',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Chats",
+          headerStyle: {
+            backgroundColor: "#1E2A32",
+          },
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="(novedades)"
+        options={{
+          title: "Novedades",
+          headerStyle: {
+            backgroundColor: "#1E2A32",
+          },
+          tabBarIcon: ({ color }) => (
+            <IconSymbol color={"#fff"} size={28} name="circle" />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="(llamadas)"
+        options={{
+          title: "Estados",
+          headerStyle: {
+            backgroundColor: "#1E2A32",
+          },
+          tabBarIcon: ({ color }) => (
+            <IconSymbol color={"#fff"} size={28} name="phone" />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="(comunidades)"
+        options={{
+          title: "Comunidades",
+          headerStyle: {
+            backgroundColor: "#1E2A32",
+          },
+          tabBarIcon: ({ color }) => (
+            <IconSymbol color={"#fff"} size={28} name="person.crop.circle" />
+          ),
         }}
       />
     </Tabs>
