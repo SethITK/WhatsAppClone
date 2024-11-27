@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const comunidades = () => {
+const index = () => {
   return (
     <View>
-      <Text>comunidades</Text>
+      <Text>index</Text>
     </View>
   )
 }
 
-export default comunidades
+export default index
 
 const styles = StyleSheet.create({})

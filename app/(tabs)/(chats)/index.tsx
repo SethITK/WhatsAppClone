@@ -22,7 +22,7 @@ interface Contact {
   status: "send" | "send-receiving" | "readed";
   message: string;
   time: string;
-  unreadMessage: number;
+  unreadMessage: number;  
 }
 
 const contacts: Contact[] = [
@@ -234,5 +234,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 16,
-  },
-});
+  }})
