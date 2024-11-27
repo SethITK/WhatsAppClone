@@ -8,15 +8,12 @@ import {
   View,
   Text,
 } from "react-native";
-
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
 
 //make whatsapp messages image, name, status, messasge, time, unread messages
-interface Contact {
+export interface Contact {
+  id: number;
   name: string;
   image: string;
   status: "send" | "send-receiving" | "readed";
@@ -25,8 +22,9 @@ interface Contact {
   unreadMessage: number;  
 }
 
-const contacts: Contact[] = [
+export const contacts: Contact[] = [
   {
+    id: 1,
     name: "Alice Johnson",
     image: "https://source.unsplash.com/random/200x200?person-1",
     status: "readed",
@@ -35,6 +33,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 2,
     name: "Bob Smith",
     image: "https://source.unsplash.com/random/200x200?person-2",
     status: "send",
@@ -43,6 +42,7 @@ const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
+    id: 3,
     name: "Carla Perez",
     image: "https://source.unsplash.com/random/200x200?person-3",
     status: "send-receiving",
@@ -51,6 +51,7 @@ const contacts: Contact[] = [
     unreadMessage: 3,
   },
   {
+    id: 4,
     name: "Daniel Lee",
     image: "https://source.unsplash.com/random/200x200?person-4",
     status: "readed",
@@ -59,6 +60,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 5,
     name: "Charlie Davis",
     image: "https://source.unsplash.com/random/200x200?person-3",
     status: "send-receiving",
@@ -67,6 +69,7 @@ const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
+    id: 6,
     name: "Diana Wilson",
     image: "https://source.unsplash.com/random/200x200?person-4",
     status: "readed",
@@ -75,6 +78,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 7,
     name: "Edward Brown",
     image: "https://source.unsplash.com/random/200x200?person-5",
     status: "send",
@@ -83,6 +87,7 @@ const contacts: Contact[] = [
     unreadMessage: 2,
   },
   {
+    id: 7,
     name: "Fiona Garcia",
     image: "https://source.unsplash.com/random/200x200?person-6",
     status: "readed",
@@ -91,6 +96,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 8,
     name: "George Miller",
     image: "https://source.unsplash.com/random/200x200?person-7",
     status: "send-receiving",
@@ -99,6 +105,7 @@ const contacts: Contact[] = [
     unreadMessage: 3,
   },
   {
+    id: 8,
     name: "Hannah Martinez",
     image: "https://source.unsplash.com/random/200x200?person-8",
     status: "readed",
@@ -107,6 +114,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 9,
     name: "Ian Thomas",
     image: "https://source.unsplash.com/random/200x200?person-9",
     status: "send",
@@ -115,6 +123,7 @@ const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
+    id: 10,
     name: "Julia White",
     image: "https://source.unsplash.com/random/200x200?person-10",
     status: "send-receiving",
@@ -123,6 +132,7 @@ const contacts: Contact[] = [
     unreadMessage: 2,
   },
   {
+    id: 11,
     name: "Kevin Taylor",
     image: "https://source.unsplash.com/random/200x200?person-11",
     status: "readed",
@@ -131,6 +141,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 12,
     name: "Laura Anderson",
     image: "https://source.unsplash.com/random/200x200?person-12",
     status: "send",
@@ -139,6 +150,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 13,
     name: "Michael Lee",
     image: "https://source.unsplash.com/random/200x200?person-13",
     status: "send-receiving",
@@ -147,6 +159,7 @@ const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
+    id: 14,
     name: "Nina Harris",
     image: "https://source.unsplash.com/random/200x200?person-14",
     status: "readed",
@@ -155,6 +168,7 @@ const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
+    id: 15,
     name: "Oscar Clark",
     image: "https://source.unsplash.com/random/200x200?person-15",
     status: "send",
@@ -166,23 +180,29 @@ const contacts: Contact[] = [
 
 export default function Chats() {
   return (
-    <View style={{ backgroundColor: "#121B22" }}>
+    <View style={{ backgroundColor: "#121B22", flex: 1 }}>
       <ScrollView>
-        <View>
-          {contacts.map((contact, index) => (
-            <View>
-              <ContactItem key={index} contact={contact} />
-            </View>
-          ))}
-        </View>
+        {contacts.map((contact, index) => (
+          <ContactItem key={contact.id} contact={contact} />
+        ))}
       </ScrollView>
     </View>
   );
 }
 
 function ContactItem({ contact }: { contact: Contact }) {
+  const router = useRouter();
+
   return (
-    <TouchableOpacity style={styles.contactContainer}>
+    <TouchableOpacity
+      onPress={(e) =>
+        router.navigate({
+          pathname: "/[id]",
+          params: { id: contact.id, title: contact.name },
+        })
+      }
+      style={styles.contactContainer}
+    >
       <View style={{ backgroundColor: "#999", borderRadius: 40 }}>
         <Image
           source={{ uri: contact.image }}

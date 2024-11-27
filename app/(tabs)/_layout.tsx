@@ -32,14 +32,23 @@ export default function TabLayout() {
     >
       <Tabs.Screen
         name="(chats)"
+        options={(props) => {
+          return {
+            title: "Chats",
+            headerStyle: {
+              backgroundColor: "#1E2A32",
+            },
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="paperplane.fill" color={color} />
+            ),
+          };
+        }}
+      />
+
+      <Tabs.Screen
+        name="(chats)/[id]/messages"
         options={{
-          title: "Chats",
-          headerStyle: {
-            backgroundColor: "#1E2A32",
-          },
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
+          headerShown: false,
         }}
       />
 
