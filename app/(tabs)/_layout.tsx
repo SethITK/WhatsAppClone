@@ -7,6 +7,7 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -39,19 +40,17 @@ export default function TabLayout() {
               backgroundColor: "#1E2A32",
             },
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="paperplane.fill" color={color} />
+              <MaterialIcons color={"#fff"} name="chat" size={28} />
             ),
           };
         }}
       />
-
       <Tabs.Screen
         name="(chats)/[id]/messages"
         options={{
           headerShown: false,
         }}
       />
-
       <Tabs.Screen
         name="(novedades)"
         options={{
@@ -60,7 +59,7 @@ export default function TabLayout() {
             backgroundColor: "#1E2A32",
           },
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="1.magnifyingglass.ar" />
+            <MaterialIcons color={"#fff"} size={28} name="notifications" />
           ),
         }}
       />
@@ -68,25 +67,30 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(llamadas)"
         options={{
-          title: "Estados",
+          title: "Llamadas",
           headerStyle: {
             backgroundColor: "#1E2A32",
           },
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="person.crop.artframe" />
+            <IconSymbol
+              color={"#fff"}
+              size={28}
+              name="phone.and.waveform.fill"
+            />
           ),
         }}
       />
 
       <Tabs.Screen
-        name="(comunidades)"
+        name="(charts)"
         options={{
-          title: "Comunidades",
+          title: "Reportes",
           headerStyle: {
             backgroundColor: "#1E2A32",
           },
+          headerTitle: "Reportes",
           tabBarIcon: ({ color }) => (
-            <IconSymbol color={"#fff"} size={28} name="phone.and.waveform.fill" />
+            <MaterialIcons color={"#fff"} size={28} name="bar-chart" />
           ),
         }}
       />

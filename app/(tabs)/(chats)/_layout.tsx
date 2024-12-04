@@ -18,6 +18,9 @@ const _layout = () => {
         name="index"
         options={{
           title: "Chats",
+          headerTitleStyle: {
+            color: "#fff",
+          },
         }}
       />
 

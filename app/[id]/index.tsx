@@ -403,7 +403,6 @@ export default function Messages() {
     <View style={{ flex: 1 }}>
       <ImageBackground
         style={{ width: "100%", height: "100%" }}
-        resizeMode="contain"
         source={require("../../assets/images/chatgBg.jpg")}
       >
         {contact && (

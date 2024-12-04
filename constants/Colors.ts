@@ -3,24 +3,24 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = "#0a7ea4";
+const tintColorDark = "#fff";
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: "#11181C",
+    background: "#fff",
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: "#687076",
+    tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: "#ECEDEE",
+    background: "#151718",
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: "#9BA1A6",
+    tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
   },
   green: {
@@ -33,5 +33,18 @@ export const Colors = {
     textSecondary: "#434343", // Texto secundario
     border: "#DADADA", // Bordes y separadores
     inputBackground: "#F0F0F0", // Fondo de los campos de entrada
-  }
+  },
+  orange: {
+    "50": "#fef4ee",
+    "100": "#fee6d6",
+    "200": "#fbc9ad",
+    "300": "#f9a278",
+    "400": "#f46734",
+    "500": "#f24d1d",
+    "600": "#e33413",
+    "700": "#bc2412",
+    "800": "#961e16",
+    "900": "#791d15",
+    "950": "#410b09",
+  },
 };

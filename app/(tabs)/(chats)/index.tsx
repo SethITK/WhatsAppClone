@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { useRouter } from "expo-router";
+import { Button, IconButton } from "react-native-paper";
 
 //make whatsapp messages image, name, status, messasge, time, unread messages
 export interface Contact {
@@ -19,7 +20,7 @@ export interface Contact {
   status: "send" | "send-receiving" | "readed";
   message: string;
   time: string;
-  unreadMessage: number;  
+  unreadMessage: number;
 }
 
 export const contacts: Contact[] = [
@@ -87,7 +88,7 @@ export const contacts: Contact[] = [
     unreadMessage: 2,
   },
   {
-    id: 7,
+    id: 8,
     name: "Fiona Garcia",
     image: "https://source.unsplash.com/random/200x200?person-6",
     status: "readed",
@@ -96,7 +97,7 @@ export const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
-    id: 8,
+    id: 9,
     name: "George Miller",
     image: "https://source.unsplash.com/random/200x200?person-7",
     status: "send-receiving",
@@ -105,7 +106,7 @@ export const contacts: Contact[] = [
     unreadMessage: 3,
   },
   {
-    id: 8,
+    id: 10,
     name: "Hannah Martinez",
     image: "https://source.unsplash.com/random/200x200?person-8",
     status: "readed",
@@ -114,7 +115,7 @@ export const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
-    id: 9,
+    id: 11,
     name: "Ian Thomas",
     image: "https://source.unsplash.com/random/200x200?person-9",
     status: "send",
@@ -123,7 +124,7 @@ export const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
-    id: 10,
+    id: 12,
     name: "Julia White",
     image: "https://source.unsplash.com/random/200x200?person-10",
     status: "send-receiving",
@@ -132,7 +133,7 @@ export const contacts: Contact[] = [
     unreadMessage: 2,
   },
   {
-    id: 11,
+    id: 13,
     name: "Kevin Taylor",
     image: "https://source.unsplash.com/random/200x200?person-11",
     status: "readed",
@@ -141,7 +142,7 @@ export const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
-    id: 12,
+    id: 14,
     name: "Laura Anderson",
     image: "https://source.unsplash.com/random/200x200?person-12",
     status: "send",
@@ -150,7 +151,7 @@ export const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
-    id: 13,
+    id: 15,
     name: "Michael Lee",
     image: "https://source.unsplash.com/random/200x200?person-13",
     status: "send-receiving",
@@ -159,7 +160,7 @@ export const contacts: Contact[] = [
     unreadMessage: 1,
   },
   {
-    id: 14,
+    id: 16,
     name: "Nina Harris",
     image: "https://source.unsplash.com/random/200x200?person-14",
     status: "readed",
@@ -168,7 +169,7 @@ export const contacts: Contact[] = [
     unreadMessage: 0,
   },
   {
-    id: 15,
+    id: 17,
     name: "Oscar Clark",
     image: "https://source.unsplash.com/random/200x200?person-15",
     status: "send",
@@ -179,13 +180,31 @@ export const contacts: Contact[] = [
 ];
 
 export default function Chats() {
+  const router = useRouter();
+
   return (
-    <View style={{ backgroundColor: "#121B22", flex: 1 }}>
+    <View style={{ backgroundColor: "#121B22", flex: 1, position: "relative" }}>
       <ScrollView>
         {contacts.map((contact, index) => (
           <ContactItem key={contact.id} contact={contact} />
         ))}
       </ScrollView>
+
+      <IconButton
+        style={{
+          position: "absolute",
+          bottom: 10,
+          right: 10,
+          backgroundColor: Colors.green.primary,
+          borderRadius: 10,
+        }}
+        onPress={() => {
+          router.navigate({
+            pathname: "/crearContacto",
+          });
+        }}
+        icon={"plus"}
+      />
     </View>
   );
 }
@@ -194,58 +213,79 @@ function ContactItem({ contact }: { contact: Contact }) {
   const router = useRouter();
 
   return (
-    <TouchableOpacity
+    <Button
       onPress={(e) =>
         router.navigate({
           pathname: "/[id]",
           params: { id: contact.id, title: contact.name },
         })
       }
-      style={styles.contactContainer}
+      style={{
+        padding: 0,
+        margin: 0,
+        width: "100%",
+      }}
+      labelStyle={{
+        padding: 0,
+        margin: 0,
+        flex: 1,
+      }}
     >
-      <View style={{ backgroundColor: "#999", borderRadius: 40 }}>
-        <Image
-          source={{ uri: contact.image }}
-          style={{ width: 48, height: 48, borderRadius: 24 }}
-        />
-      </View>
-      <View style={{ flex: 1, marginLeft: 16 }}>
-        <Text style={{ fontWeight: "bold", color: "#fff" }}>
-          {contact.name}
-        </Text>
-        <Text
-          style={{
-            color: "#999",
-          }}
-        >
-          {contact.message}
-        </Text>
-      </View>
-      <View style={{ alignItems: "flex-end" }}>
-        <Text
-          style={{
-            color: contact.unreadMessage ? Colors.green.primary : "#fff",
-          }}
-        >
-          {contact.time}
-        </Text>
-        {contact.unreadMessage > 0 && (
-          <View
+      <View
+        style={[
+          styles.contactContainer,
+          {
+            flex: 1,
+            width: "100%",
+            paddingHorizontal: 8,
+            paddingVertical: 16,
+          },
+        ]}
+      >
+        <View style={{ backgroundColor: "#999", borderRadius: 40 }}>
+          <Image
+            source={{ uri: contact.image }}
+            style={{ width: 48, height: 48, borderRadius: 24 }}
+          />
+        </View>
+        <View style={{ flex: 1, marginLeft: 16, alignItems: "flex-start" }}>
+          <Text style={{ fontWeight: "bold", color: "#fff" }}>
+            {contact.name}
+          </Text>
+          <Text
             style={{
-              backgroundColor: Colors.green.primary,
-              borderRadius: 20,
-              padding: 4,
-              aspectRatio: 1,
-              paddingHorizontal: 8,
-              alignItems: "center",
-              justifyContent: "center",
+              color: "#999",
             }}
           >
-            <Text style={{}}>{contact.unreadMessage}</Text>
-          </View>
-        )}
+            {contact.message}
+          </Text>
+        </View>
+        <View style={{ alignItems: "flex-end" }}>
+          <Text
+            style={{
+              color: contact.unreadMessage ? Colors.green.primary : "#fff",
+            }}
+          >
+            {contact.time}
+          </Text>
+          {contact.unreadMessage > 0 && (
+            <View
+              style={{
+                backgroundColor: Colors.green.primary,
+                borderRadius: 20,
+                padding: 4,
+                aspectRatio: 1,
+                paddingHorizontal: 8,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text style={{}}>{contact.unreadMessage}</Text>
+            </View>
+          )}
+        </View>
       </View>
-    </TouchableOpacity>
+    </Button>
   );
 }
 
@@ -254,4 +294,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 16,
-  }})
+  },
+});
