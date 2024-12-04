@@ -8,6 +8,7 @@ import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Button } from "react-native-paper";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -16,12 +17,16 @@ export default function TabLayout() {
     <Tabs
       initialRouteName="(chats)"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "#fff",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarInactiveBackgroundColor: "#1E2A32",
+        tabBarActiveBackgroundColor: Colors.green.textPrimary,
         animation: "shift",
+        headerTitleStyle: {
+          color: "#fff",
+        },
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
@@ -83,15 +88,20 @@ export default function TabLayout() {
 
       <Tabs.Screen
         name="(charts)"
-        options={{
-          title: "Reportes",
-          headerStyle: {
-            backgroundColor: "#1E2A32",
-          },
-          headerTitle: "Reportes",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons color={"#fff"} size={28} name="bar-chart" />
-          ),
+        options={(props) => {
+          return {
+            title: "Reportes",
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerStyle: {
+              backgroundColor: "#1E2A32",
+            },
+            headerTitle: "Reportes",
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons color={"#fff"} size={28} name="bar-chart" />
+            ),
+          };
         }}
       />
     </Tabs>

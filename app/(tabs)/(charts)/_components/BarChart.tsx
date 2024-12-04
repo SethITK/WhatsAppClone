@@ -3,62 +3,82 @@ import React, { useState } from "react";
 import { Card } from "react-native-elements";
 import { Colors } from "@/constants/Colors";
 import { BarChart } from "react-native-chart-kit";
-import { chartConfig } from "..";
 import { color } from "react-native-elements/dist/helpers";
 
-const BarChartComponent = () => {
+const BarChartComponent = ({
+  chartConfig,
+  messagesByMonth,
+}: {
+  chartConfig: any;
+  messagesByMonth: {
+    enero: number;
+    febrero: number;
+    marzo: number;
+    abril: number;
+    mayo: number;
+    junio: number;
+  };
+}) => {
   const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
-  const handleLayout = (event) => {
-    const { width } = event.nativeEvent.layout;
+  const handleLayout = (event: any) => {
+    const { width, height } = event.nativeEvent.layout;
+
     setWidth(width);
+    setHeight(height);
   };
 
   return (
-    <Card
-      wrapperStyle={{
-        padding: 12,
-      }}
-      containerStyle={{
-        borderRadius: 16,
-        backgroundColor: "#1E2923",
-        borderColor: "#1E2923",
-      }}
-    >
-      <Card.Title
+    <>
+      <Text
         style={{
           color: Colors.green.primary,
+          textAlign: "center",
+          fontSize: 16,
+          fontWeight: "bold",
         }}
       >
-        Mensajes enviados por mes
-      </Card.Title>
+        Mensajes Enviados por Mes
+      </Text>
       <View style={{ flex: 1 }} onLayout={handleLayout}>
         <BarChart
+          yAxisLabel=""
+          yAxisSuffix="M"
           style={graphStyle}
           data={{
             labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
             datasets: [
               {
-                data: [20, 45, 28, 80, 99, 43],
+                data: [
+                  messagesByMonth["enero"],
+                  messagesByMonth["febrero"],
+                  messagesByMonth["marzo"],
+                  messagesByMonth["abril"],
+                  messagesByMonth["mayo"],
+                  messagesByMonth["junio"],
+                ],
                 color(opacity) {
                   return Colors.green.textPrimary;
                 },
               },
             ],
           }}
+          height={height}
           width={width}
-          height={220}
           yLabelsOffset={30}
           chartConfig={{
             ...chartConfig,
             color(opacity, index) {
               return "#999";
             },
+            barPercentage: 1,
+            decimalPlaces: 0,
           }}
           verticalLabelRotation={30}
         />
       </View>
-    </Card>
+    </>
   );
 };
 

@@ -1,9 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
+import { IconButton } from "react-native-paper";
 
 const _layout = () => {
+  const router = useRouter();
   return (
     <Stack
       screenOptions={{
@@ -21,28 +23,22 @@ const _layout = () => {
           headerTitleStyle: {
             color: "#fff",
           },
-        }}
-      />
-
-      <Stack.Screen
-        name="[id]/messages"
-        options={(props) => {
-          return {
-            title: props.route.params.title || "Messages",
-            headerRight: () => (
+          headerRight: () => {
+            return (
               <View style={{ flexDirection: "row", gap: 16, marginRight: 12 }}>
-                <TouchableOpacity>
-                  <AntDesign color={"#fff"} name="camera" size={20} />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <AntDesign color={"#fff"} name="phone" size={20} />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <AntDesign color={"#fff"} name="ellipsis1" size={20} />
-                </TouchableOpacity>
+                <IconButton
+                  onPress={() => {
+                    router.replace({
+                      pathname: "/login",
+                    });
+                  }}
+                  icon={"shutdown"}
+                  size={20}
+                  iconColor="#fff"
+                />
               </View>
-            ),
-          };
+            );
+          },
         }}
       />
     </Stack>

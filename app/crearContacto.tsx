@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { Input, Button, Text } from "react-native-elements";
-import { Modal, PaperProvider, Portal, RadioButton } from "react-native-paper";
+import {
+  Checkbox,
+  Modal,
+  PaperProvider,
+  Portal,
+  RadioButton,
+  Switch,
+} from "react-native-paper";
 import { Colors } from "@/constants/Colors";
 
 const CountryValues = {
@@ -15,7 +22,16 @@ const CreateContactForm = () => {
   const [apellido, setApellido] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("mexico");
-
+  const [notification, setNotification] = useState(false);
+  const [options, setOptions] = useState<{
+    favorite: boolean;
+    blocked: boolean;
+    videoOrVoice: boolean;
+  }>({
+    favorite: false,
+    blocked: false,
+    videoOrVoice: false,
+  });
   const [visible, setVisible] = useState(false);
 
   const showModal = () => setVisible(true);
@@ -63,8 +79,7 @@ const CreateContactForm = () => {
             }}
             value={CountryValues[country as keyof typeof CountryValues]}
             style={{ color: "#fff" }}
-            onFocus={showModal} // Mostrar modal al enfocar el input
-            disabled
+            onPress={showModal} // Mostrar modal al enfocar el input
             containerStyle={styles.inputContainer}
           />
           <Input
@@ -80,6 +95,46 @@ const CreateContactForm = () => {
             onChangeText={setPhone}
             containerStyle={styles.inputContainer}
           />
+
+          <View>
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Favorito"
+              status={options.favorite ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, favorite: !options.favorite })
+              }
+              color={Colors.green.primary}
+            />
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Bloqueado"
+              status={options.blocked ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, blocked: !options.blocked })
+              }
+              color={Colors.green.primary}
+            />
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Silenciado"
+              status={options.videoOrVoice ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, videoOrVoice: !options.videoOrVoice })
+              }
+              color={Colors.green.primary}
+            />
+          </View>
+          <View style={[styles.row, { paddingHorizontal: 12 }]}>
+            <Text style={{ color: "#fff" }}>
+              Recibir notificaciones de este usuario?
+            </Text>
+            <Switch
+              value={notification}
+              onValueChange={setNotification}
+              color={Colors.green.primary}
+            />
+          </View>
         </View>
 
         {/* Botón para guardar */}
@@ -112,9 +167,24 @@ const CreateContactForm = () => {
                 hideModal();
               }}
             >
-              <RadioButton.Item label="México" value="mexico" />
-              <RadioButton.Item label="Estados Unidos" value="usa" />
-              <RadioButton.Item label="Canadá" value="canada" />
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="México"
+                labelStyle={{ color: "#fff" }}
+                value="mexico"
+              />
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="Estados Unidos"
+                labelStyle={{ color: "#fff" }}
+                value="usa"
+              />
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="Canadá"
+                labelStyle={{ color: "#fff" }}
+                value="canada"
+              />
             </RadioButton.Group>
           </View>
         </Modal>

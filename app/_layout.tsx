@@ -13,7 +13,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { IconButton, PaperProvider } from "react-native-paper";
+import { Button, IconButton, PaperProvider } from "react-native-paper";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,7 +38,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <PaperProvider>
-        <Stack>
+        <Stack initialRouteName="login">
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen
@@ -53,7 +53,26 @@ export default function RootLayout() {
                 },
                 headerBackButtonDisplayMode: "hidden",
                 headerBackVisible: false,
-                title: props.route.params.title || "Messages",
+                headerTitle: () => (
+                  <Button
+                    onPress={() => {
+                      router.push({
+                        pathname: "/[id]chats",
+                        params: {
+                          id: props?.route?.params?.id || "1",
+                          title: props?.route?.params?.title || "Messages",
+                        },
+                      });
+                    }}
+                    labelStyle={{
+                      color: "#fff",
+                      fontSize: 16,
+                    }}
+                    style={{ flexDirection: "row", gap: 16 }}
+                  >
+                    {props.route.params.title || "Messages"}
+                  </Button>
+                ),
                 headerLeft: () => (
                   <IconButton
                     style={{ marginLeft: 0 }}
@@ -108,6 +127,21 @@ export default function RootLayout() {
                   }}
                 />
               ),
+            }}
+          />
+
+          <Stack.Screen
+            name="login"
+            options={{
+              title: "Iniciar Sesion",
+              headerStyle: {
+                backgroundColor: "#1E2A32",
+              },
+              headerTitleStyle: {
+                color: "#fff",
+              },
+              headerBackButtonDisplayMode: "hidden",
+              headerBackVisible: false,
             }}
           />
         </Stack>
