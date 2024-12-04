@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,10 +7,13 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 
 import { Colors } from "@/constants/Colors";
+import { IconButton } from "react-native-paper";
+
+import { useRouter } from "expo-router";
 
 interface Estado {
   id: number;
@@ -100,6 +103,8 @@ const mockCanalesSugeridos: CanalSugerido[] = [
 ];
 
 const Novedades = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {/* Estados */}
@@ -120,7 +125,7 @@ const Novedades = () => {
         data={mockCanales}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.canalItem}>
-            <Image source={{ uri: item.imagen }} style={styles.canalImagen} />
+            <ImageBackground source={{ uri: item.imagen }} style={styles.canalImagen} />
 
             <View style={styles.canalInfo}>
               <Text style={styles.canalNombre}>{item.nombre}</Text>
@@ -148,7 +153,7 @@ const Novedades = () => {
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.canalSugeridoItem}>
 
-            <Image source={{ uri: item.imagen }} style={styles.canalImagen} />
+            <ImageBackground source={{ uri: item.imagen }} style={styles.canalImagen} />
 
             <View style={styles.canalInfo}>
               <Text style={styles.canalNombre}>{item.nombre}</Text>
@@ -166,6 +171,22 @@ const Novedades = () => {
       <TouchableOpacity style={styles.explorarMas}>
         <Text style={styles.explorarMasText}>Explorar más</Text>
       </TouchableOpacity>
+
+      <IconButton
+        style={{
+          position: "absolute",
+          bottom: 10,
+          right: 10,
+          backgroundColor: Colors.green.primary,
+          borderRadius: 10,
+        }}
+        onPress={() => {
+          router.navigate({
+            pathname: "/crearEstado",
+          });
+        }}
+        icon={"plus"}
+      />
     </View>
   );
 };
