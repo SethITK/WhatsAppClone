@@ -6,7 +6,8 @@ import {
   Image,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 
 import { Colors } from "@/constants/Colors";
@@ -37,18 +38,14 @@ interface CanalSugerido {
 
 // Mock data
 const mockEstados: Estado[] = [
-  { id: 1, nombre: "Erika", imagenPerfil: "https://source.unsplash.com/random/100x100", visto: true },
-  { id: 2, nombre: "Osvaldo", imagenPerfil: "https://example.com/imagen-osvaldo.jpg", visto: true },
-  { id: 3, nombre: "Javier", imagenPerfil: "https://example.com/imagen-javier.jpg", visto: true },
-  { id: 4, nombre: "Ana", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: true },
-  { id: 5, nombre: "Andrea", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: true },
-  { id: 6, nombre: "Cesar", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 7, nombre: "Oliver", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 8, nombre: "Carlos", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 9, nombre: "Vanessa", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 10, nombre: "Talmantes", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 11, nombre: "Gavi", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
-  { id: 12, nombre: "Tavo", imagenPerfil: "https://example.com/imagen-ana.jpg", visto: false },
+  { id: 1, nombre: "Erika", imagenPerfil: require('../../../assets/images/claudio-schwarz-QDPH5m4h3XI-unsplash.jpg'), visto: true },
+  { id: 2, nombre: "Osvaldo", imagenPerfil: require('../../../assets/images/clay-banks-haJdK-oucKg-unsplash.jpg'), visto: true },
+  { id: 3, nombre: "Javier", imagenPerfil: require('../../../assets/images/dean-rose-M1tblS6U3Bo-unsplash.jpg'), visto: true },
+  { id: 4, nombre: "Ana", imagenPerfil: require('../../../assets/images/eric-lee-ss8Dka_Tvwg-unsplash.jpg'), visto: true },
+  { id: 5, nombre: "Andrea", imagenPerfil: require('../../../assets/images/hanvin-cheong-2VDyy131HWE-unsplash.jpg'), visto: true },
+  { id: 6, nombre: "Cesar", imagenPerfil: require('../../../assets/images/harman-sandhu-FpYoDqGGI4A-unsplash.jpg'), visto: false },  
+  { id: 7, nombre: "Oliver", imagenPerfil: require('../../../assets/images/krismas-JGLLU1YNxU4-unsplash.jpg'), visto: false },
+  { id: 8, nombre: "Carlos", imagenPerfil: require('../../../assets/images/chatgBg.jpg'), visto: false },
 ];
 
 const mockCanales: Canal[] = [
@@ -110,10 +107,10 @@ const Novedades = () => {
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.estadoScroll}>
         {mockEstados.map((estado, index) => (
-          <View key={index} style={styles.estadoItem}>
-            <Image source={{ uri: estado.imagenPerfil }} style={[styles.estadoImagen, estado.visto ? styles.visto : styles.noVisto]} />
+          <TouchableOpacity key={index} style={styles.estadoItem}>
+            <ImageBackground source={estado.imagenPerfil} style={[styles.estadoImagen, estado.visto ? styles.visto : styles.noVisto]} imageSt le={{ borderRadius: 40 }} />
             <Text style={styles.estadoNombre}>{estado.nombre}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 
@@ -122,7 +119,7 @@ const Novedades = () => {
       <FlatList
         data={mockCanales}
         renderItem={({ item }) => (
-          <View style={styles.canalItem}>
+          <TouchableOpacity style={styles.canalItem}>
             <Image source={{ uri: item.imagen }} style={styles.canalImagen} />
 
             <View style={styles.canalInfo}>
@@ -139,7 +136,7 @@ const Novedades = () => {
               )}
             </View>
 
-          </View>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.nombre}
       />
@@ -149,7 +146,7 @@ const Novedades = () => {
       <FlatList
         data={mockCanalesSugeridos}
         renderItem={({ item }) => (
-          <View style={styles.canalSugeridoItem}>
+          <TouchableOpacity style={styles.canalSugeridoItem}>
 
             <Image source={{ uri: item.imagen }} style={styles.canalImagen} />
 
@@ -162,7 +159,7 @@ const Novedades = () => {
               <Text style={styles.seguirButtonText}>{item.seguido ? "Siguiendo" : "Seguir"}</Text>
             </TouchableOpacity>
 
-          </View>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.nombre}
       />
@@ -196,9 +193,10 @@ const styles = StyleSheet.create({
   },
   estadoImagen: {
     width: 70,
-    height: 70,
+    height: 70, 
     borderRadius: 40,
     borderWidth: 2,
+    overflow: 'hidden'
   },
   visto: {
     borderColor: Colors.green.primary,
@@ -257,8 +255,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 8,
-    borderBottomColor: Colors.dark.icon,
-    borderBottomWidth: 1,
   },
   canalSeguidores: {
     color: Colors.dark.icon,
