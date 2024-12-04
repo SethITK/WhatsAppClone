@@ -39,6 +39,13 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <PaperProvider>
         <Stack initialRouteName="login">
+        <Stack.Screen
+            name="login"
+            options={{
+              title: "Iniciar Sesion",
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen
@@ -127,14 +134,6 @@ export default function RootLayout() {
                   }}
                 />
               ),
-            }}
-          />
-
-          <Stack.Screen
-            name="login"
-            options={{
-              title: "Iniciar Sesion",
-              headerShown: false,
             }}
           />
         </Stack>

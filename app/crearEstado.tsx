@@ -8,16 +8,27 @@ import {
   TextInput,
 } from "react-native";
 import { Text, Button } from "react-native-elements";
-import { Modal, Portal, PaperProvider } from "react-native-paper";
+import { Modal, Portal, PaperProvider, Checkbox, RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { Colors } from "@/constants/Colors";
 
 
 const crearEstado = () => {
 
+    const [options, setOptions] = useState<{
+        favorite: boolean;
+        blocked: boolean;
+        videoOrVoice: boolean;
+      }>({
+        favorite: false,
+        blocked: false,
+        videoOrVoice: false,
+    });
+
     const [name, setName] = useState("");
     const [profileImage, setProfileImage] = useState<string | null>(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const [country, setCountry] = useState("mexico");
   
     const pickImage = async () => {
       // Solicitar permisos para acceder a la galería
@@ -78,14 +89,74 @@ const crearEstado = () => {
             )}
           </TouchableOpacity>
         </View>
-
-        {/* Botón para guardar */}
-        <Button
-          title="Guardar Perfil"
-          buttonStyle={styles.saveButton}
-          onPress={saveProfile}
-        />
       </View>
+
+      <View>e
+        <Text style={styles.text}>Solo mostrar a...</Text>
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Oliver"
+              status={options.favorite ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, favorite: !options.favorite })
+              }
+              color={Colors.green.primary}
+            />
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Cesár"
+              status={options.blocked ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, blocked: !options.blocked })
+              }
+              color={Colors.green.primary}
+            />
+            <Checkbox.Item
+              labelStyle={{ color: "#fff" }}
+              label="Vanessa"
+              status={options.videoOrVoice ? "checked" : "unchecked"}
+              onPress={() =>
+                setOptions({ ...options, videoOrVoice: !options.videoOrVoice })
+              }
+              color={Colors.green.primary}
+            />
+        </View>
+
+        <View>
+        <Text style={styles.text}>Visibilidad</Text>
+        <RadioButton.Group
+              value={country}
+              onValueChange={(value) => {
+                setCountry(value);
+              }}
+            >
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="Visible para todos"
+                labelStyle={{ color: "#fff" }}
+                value="mexico"
+              />
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="Visible para unicos..."
+                labelStyle={{ color: "#fff" }}
+                value="usa"
+              />
+              <RadioButton.Item
+                color={Colors.green.primary}
+                label="Solo amigos"
+                labelStyle={{ color: "#fff" }}
+                value="canada"
+              />
+            </RadioButton.Group>
+
+            {/* Botón para guardar */}
+            <Button
+                title="Guardar Perfil"
+                buttonStyle={styles.saveButton}
+                onPress={saveProfile}
+            />
+        </View>
 
       {/* Modal para confirmar la imagen seleccionada */}
       <Portal>
@@ -115,6 +186,7 @@ const crearEstado = () => {
           </View>
         </Modal>
       </Portal>
+
     </PaperProvider>
   )
 }
@@ -131,6 +203,13 @@ const styles = StyleSheet.create({
       title: {
         color: Colors.dark.text,
         marginBottom: 16,
+      },
+      text: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingHorizontal: 12,
+        paddingVertical: 12
       },
       form: {
         flex: 1,
