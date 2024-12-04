@@ -134,14 +134,7 @@ export default function RootLayout() {
             name="login"
             options={{
               title: "Iniciar Sesion",
-              headerStyle: {
-                backgroundColor: "#1E2A32",
-              },
-              headerTitleStyle: {
-                color: "#fff",
-              },
-              headerBackButtonDisplayMode: "hidden",
-              headerBackVisible: false,
+              headerShown: false,
             }}
           />
         </Stack>

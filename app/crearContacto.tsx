@@ -70,18 +70,7 @@ const CreateContactForm = () => {
             onChangeText={setApellido}
             containerStyle={styles.inputContainer}
           />
-          <Input
-            placeholder="País"
-            leftIcon={{
-              type: "font-awesome",
-              name: "globe",
-              color: "#999",
-            }}
-            value={CountryValues[country as keyof typeof CountryValues]}
-            style={{ color: "#fff" }}
-            onPress={showModal} // Mostrar modal al enfocar el input
-            containerStyle={styles.inputContainer}
-          />
+
           <Input
             placeholder="Teléfono"
             keyboardType="phone-pad"
@@ -94,6 +83,20 @@ const CreateContactForm = () => {
             value={phone}
             onChangeText={setPhone}
             containerStyle={styles.inputContainer}
+          />
+          <Button
+            title={
+              CountryValues[country as keyof typeof CountryValues] ||
+              "Selleciona un país"
+            }
+            buttonStyle={{
+              justifyContent: "flex-start",
+              marginBottom: 20,
+              borderWidth: 0,
+            }}
+            titleStyle={{ color: "#fff" }}
+            onPress={showModal}
+            type="outline"
           />
 
           <View>
